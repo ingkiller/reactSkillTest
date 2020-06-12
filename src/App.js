@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo,memo} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import './assets/css/styles.css'
@@ -9,20 +9,16 @@ import {LeftSide,RightSide} from './containers'
 function App() {
 
     const dispatch = useDispatch()
-    const store = useStore()
-    const{app:{tasks}}=useSelector(state=>state)
+    //const store = useStore()
+   // const{app:{tasks}}=useSelector(state=>state)
     useEffect(()=>{
         dispatch(getTasks())
     },[])
-    useEffect(()=>{
-        if(tasks.length > 0){
-            dispatch(getRoles())
-        }
-    },[tasks])
+
   return (
     <div className="container-fluid">
         {
-            console.log('store:',store.getState())
+            console.log('app:')
         }
         <div className="row justify-content-center"> <h1>React test</h1></div>
         <div className="row">
@@ -35,8 +31,12 @@ function App() {
         </div>
 
 
+
     </div>
   );
 }
+/*
+
+ */
 
 export default App;

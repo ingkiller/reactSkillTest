@@ -6,6 +6,9 @@ const filterSlice = createSlice({
     name: 'app',
     initialState: {search:'',roles:[],status:[]},
     reducers: {
+        getFilter(state,action){
+            return state
+        },
         addSearch(state, action) {
             state.search=action.payload
         },
@@ -34,6 +37,6 @@ const filterSlice = createSlice({
 
 })
 
-export const { addSearch,addRoles,addStatus,clearAllFilter} = filterSlice.actions
+export const { addSearch,addRoles,addStatus,clearAllFilter,getFilter} = filterSlice.actions
 
 export default filterSlice.reducer

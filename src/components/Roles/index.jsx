@@ -1,6 +1,7 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,memo} from 'react'
 import styled from 'styled-components';
-
+import {useDispatch,useSelector} from "react-redux";
+import {requestRoles} from "../../reducers/app";
 import {RoleItem} from '../index'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee,faSortUp,faSortDown,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons'
@@ -74,42 +75,58 @@ const BoxHeader=styled.div`
    
 `;
 
-const Roles=({title,arrRoles,rolesSelected,onselectRole})=>{
+
+const Roles=memo(({title,onselectRole})=>{
     const [show,setShow]=useState(true)
+    const [arrRoles,setArrRoles]=useState([])
+    const [rolesSelected,setRolesSelected]=useState([])
 
-    useEffect(()=>{
-       //call api and save result using setState
-    },[])
+    const dispatch = useDispatch()
 
-    const _onSelectRole=(roleName)=>{
-        onselectRole(roleName)
-    }
+   useEffect(()=>{
+      dispatch(requestRoles()).then(result=>{
+          setArrRoles(result.payload)
+      })
+   },[])
+
+       const _onSelectRole=(roleName)=>{
+           onselectRole(roleName)
+
+           let selected = [...rolesSelected]
+
+           let index = selected.indexOf(roleName)
+           if(index === -1){
+               selected.push(roleName)
+           }else
+           {
+               selected = selected.filter(elem => elem !== roleName)
+           }
+           setRolesSelected(selected)
+       }
 
     return(<>
             <BoxHeader>
-            <h4>{title}</h4>
-            <span type="button" onClick={()=>setShow(!show)}>
+                <h4>{title}</h4>
+                <span type="button" onClick={()=>setShow(!show)}>
                 <FontAwesomeIcon icon={show?faEyeSlash:faEye} />{' '}
-               <FontAwesomeIcon icon={show? faSortUp:faSortDown} />
+                    <FontAwesomeIcon icon={show? faSortUp:faSortDown} />
             </span>
-        </BoxHeader>
-        <div className={show?"collapse show":"collapse"}>
-            <Container>
-                <ul>
-                    {
-                        arrRoles.map((item,key)=>(<RoleItem
-                            key={key}
-                            {...item}
-                            selected={rolesSelected.indexOf(item.role) === -1?false:true}
-                            onSelect={_onSelectRole}
-                        />))
-                    }
-                </ul>
-            </Container>
-        </div>
+            </BoxHeader>
+            <div className={show?"collapse show":"collapse"}>
+                <Container>
+                    <ul>
+                        {
+                            arrRoles.map((item,key)=>(<RoleItem
+                                key={key}
+                                {...item}
+                                selected={rolesSelected.indexOf(item.role) === -1?false:true}
+                                onSelect={_onSelectRole}
+                            />))
+                        }
+                    </ul>
+                </Container>
+            </div>
 </>
         )
-}
-
-
+})
 export default Roles

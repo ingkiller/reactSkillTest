@@ -13,5 +13,4 @@ ButtonsFilter.prototype={
     onClear:PropTypes.func.isRequired,
     onFilter:PropTypes.func.isRequired
 }
-//export default ButtonsFilter
 export default memo(ButtonsFilter)

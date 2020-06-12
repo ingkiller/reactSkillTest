@@ -1,12 +1,13 @@
-import React,{useMemo} from "react";
-import {useSelector,useDispatch} from "react-redux";
+import React,{useMemo,useCallback,memo} from "react";
+import {useSelector,useDispatch,useStore} from "react-redux";
 import {onFilter,onClear} from "../reducers/app";
-import {clearAllFilter,addRoles} from "../reducers/filter";
+import {clearAllFilter,addRoles,getFilter} from "../reducers/filter";
 import {ButtonsFilter,Roles} from '../components'
 
 const LeftSide=props=>{
 
-    const {app:{roles},filter}=useSelector(state=>state)
+  //  const {filter}=useSelector(state=>state)
+    const store = useStore()
     const dispatch = useDispatch()
 
     const _onClearFilter=(event)=>{
@@ -14,28 +15,23 @@ const LeftSide=props=>{
         dispatch(clearAllFilter())
     }
     const _onFilter = (event)=>{
+        const {filter}=store.getState()
         dispatch(onFilter(filter))
-    }
-    const _onselectRole=(newRole)=>{
-        dispatch(addRoles(newRole))
-    }
 
-    const _roles = useMemo(()=>{
-        return <Roles title={"Roles"}
-                      arrRoles={roles}
-                      rolesSelected={filter.roles}
-                      onselectRole={_onselectRole}
-        />
-    },[roles,filter.roles])
+    }
+    const _onselectRole = useCallback((newRole) => {
+        dispatch(addRoles(newRole))
+    }, []);
+
     return <>
         {
-            _roles
+            console.log('leftside render')
         }
-        <div className="my-3"></div>
+        <Roles title={"Roles"} onselectRole={_onselectRole}/>
         <ButtonsFilter clearTxt={"Clear"}
-               filterTxt={"Filter"}
-               onClear={_onClearFilter}
-               onFilter={_onFilter}/>
+                       filterTxt={"Filter"}
+                       onClear={_onClearFilter}
+                       onFilter={_onFilter}/>
         </>
 }
-export default LeftSide
+export default memo(LeftSide)

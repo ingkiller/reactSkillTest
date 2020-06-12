@@ -22,7 +22,7 @@ const appSlice = createSlice({
                     if(r.indexOf(value) !== -1)
                         count++
                 }
-                rr.push({"role":key,count:count})
+                rr.push({role:value,count:count})
             }
             state.roles = rr
         },

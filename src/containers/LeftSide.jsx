@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useMemo} from "react";
 import {useSelector,useDispatch} from "react-redux";
 import {onFilter,onClear} from "../reducers/app";
 import {clearAllFilter,addRoles} from "../reducers/filter";
@@ -8,6 +8,7 @@ const LeftSide=props=>{
 
     const {app:{roles},filter}=useSelector(state=>state)
     const dispatch = useDispatch()
+
     const _onClearFilter=(event)=>{
         dispatch(onClear())
         dispatch(clearAllFilter())
@@ -16,16 +17,20 @@ const LeftSide=props=>{
         dispatch(onFilter(filter))
     }
     const _onselectRole=(newRole)=>{
-
-        console.log('_onselectRole:',newRole)
         dispatch(addRoles(newRole))
     }
-    return <>
-        <Roles title={"Roles"}
-               arrRoles={roles}
-               rolesSelected={filter.roles}
-               onselectRole={_onselectRole}
+
+    const _roles = useMemo(()=>{
+        return <Roles title={"Roles"}
+                      arrRoles={roles}
+                      rolesSelected={filter.roles}
+                      onselectRole={_onselectRole}
         />
+    },[roles,filter.roles])
+    return <>
+        {
+            _roles
+        }
         <div className="my-3"></div>
         <ButtonsFilter clearTxt={"Clear"}
                filterTxt={"Filter"}

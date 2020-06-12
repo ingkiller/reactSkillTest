@@ -4,9 +4,7 @@ import {TaskItem} from "../index";
 
 const FilterCmp = ({title,header,arrTask,search,onChangeSearch})=>{
     return <div className="container-fluid">
-        {
-            console.log('FilterCmp search:',search)
-        }
+
         <div className="row"><h1>{title}</h1></div>
         <div className="row mb-5">
             <form className="form-inline my-2 my-lg-0">

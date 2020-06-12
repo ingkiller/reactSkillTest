@@ -1,4 +1,4 @@
-import React from "react";
+import React,{memo} from "react";
 import PropTypes from 'prop-types'
 
 const ButtonsFilter=({clearTxt,filterTxt,onClear,onFilter})=>{
@@ -13,4 +13,5 @@ ButtonsFilter.prototype={
     onClear:PropTypes.func.isRequired,
     onFilter:PropTypes.func.isRequired
 }
-export default ButtonsFilter
+//export default ButtonsFilter
+export default memo(ButtonsFilter)

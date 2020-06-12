@@ -18,9 +18,6 @@ const RightSide=props=>{
         dispatch(addSearch(event.target.value))
     }
     return <div className="container-fluid">
-        {
-           // console.log('filter render:',search)
-        }
         <div className="row ">
             <FilterCmp
                 title={"Awesome Cmp"}

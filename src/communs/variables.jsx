@@ -1,9 +1,9 @@
 export const ROLES = Object.freeze({
     "DEVELOPER":"Developer",
     "ANALIST":"Analist",
-    "TEAM_LEADER":"Team Leader",
+    "TEAM_LEADER":"Team_Leader",
     "DESIGNER":"Designer",
-    "PROJECT_OWNER":"Project Owner"
+    "PROJECT_OWNER":"Project_Owner"
 
 })
 

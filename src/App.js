@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
+import './assets/css/styles.css'
 import {useDispatch,useStore,useSelector} from "react-redux";
 import {getTasks,getRoles} from "./reducers/app";
 import {LeftSide,RightSide} from './containers'
@@ -13,6 +14,11 @@ function App() {
     useEffect(()=>{
         dispatch(getTasks())
     },[])
+    useEffect(()=>{
+        if(tasks.length > 0){
+            dispatch(getRoles())
+        }
+    },[tasks])
   return (
     <div className="container-fluid">
         {
@@ -20,7 +26,7 @@ function App() {
         }
         <div className="row justify-content-center"> <h1>React test</h1></div>
         <div className="row">
-            <div className="col-3 bg-light">
+            <div className="col-3">
                 <LeftSide/>
             </div>
             <div className="col-8  bg-light">

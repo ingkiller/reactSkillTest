@@ -10,6 +10,17 @@ const filterSlice = createSlice({
             state.search=action.payload
         },
         addRoles(state, action) {
+            let roleName = action.payload
+            let rolesSelected = [...state.roles]
+
+            let index = rolesSelected.indexOf(roleName)
+            if(index === -1){
+                rolesSelected.push(roleName)
+            }else
+            {
+                rolesSelected = rolesSelected.filter(elem => elem !== roleName)
+            }
+            state.roles=rolesSelected
         },
         addStatus(state,action){
 

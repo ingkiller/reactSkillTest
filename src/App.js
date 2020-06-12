@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import {useDispatch,useStore,useSelector} from "react-redux";
 import {getTasks,getRoles} from "./reducers/app";
-
+import {LeftSide,RightSide} from './containers'
 
 function App() {
 
@@ -18,7 +18,17 @@ function App() {
         {
             console.log('store:',store.getState())
         }
-      <h1>React test</h1>
+        <div className="row justify-content-center"> <h1>React test</h1></div>
+        <div className="row">
+            <div className="col-3 bg-light">
+                <LeftSide/>
+            </div>
+            <div className="col-8  bg-light">
+                <RightSide/>
+            </div>
+        </div>
+
+
     </div>
   );
 }

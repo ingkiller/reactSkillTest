@@ -1,21 +1,25 @@
-import React from "react";
-const EmployeeItem = props=>{
-    const{name}=props
-    const getInitials=()=>{
-        return  name[0].toUpperCase() + name[name.indexOf(' ')+1].toUpperCase()
+import React,{memo} from "react";
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import Avatar from "react-avatar";
+const Container = styled.div`
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center;
+    justify-content:left;
+`
 
-    }
-    return <div className="d-flex flex-row align-items-center">
-        <div className="rounded-circle mr-1 text-danger float-left bg-warning "
-             style={{ width: '30px', height: '30px',
-                 display: 'flex',
-                 justifyContent: 'center',
-                 alignItems: 'center'
-             }}>
-            <span className="text-white" >{getInitials()}</span>
-        </div>
-        <div className="ml-1">{name}</div>
-    </div>
+const TextSpan = styled.span`
+    margin-left: .5rem !important;
+`
+
+const EmployeeItem = memo(({name})=>{
+    return <Container>
+            <Avatar name={name} size={40} round />
+            <TextSpan>{name}</TextSpan>
+    </Container>
+})
+EmployeeItem.prototype={
+    name:PropTypes.string.isRequired
 }
-
 export default EmployeeItem

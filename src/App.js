@@ -9,8 +9,6 @@ import {LeftSide,RightSide} from './containers'
 function App() {
 
     const dispatch = useDispatch()
-    //const store = useStore()
-   // const{app:{tasks}}=useSelector(state=>state)
     useEffect(()=>{
         dispatch(getTasks())
     },[])
@@ -29,14 +27,9 @@ function App() {
                 <RightSide/>
             </div>
         </div>
-
-
-
     </div>
   );
 }
-/*
 
- */
 
 export default App;

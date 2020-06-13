@@ -75,24 +75,21 @@ const appSlice = createSlice({
             const {search,roles} = action.payload
 
             let data = [...state.tasks]
+
             let result = data.filter(task=>{
                 if(search !== ''){
                     if(task.employee.toLowerCase().indexOf(search.toLowerCase()) !== -1)
-                        return true
-                }
+                           return true}
 
-                let flag = true
+                let flag = false
                     for(let i = 0;i< roles.length;i++){
                         let tRoles = task.roles.map(item=>item.toLowerCase())
-                        if(tRoles.indexOf(roles[i].toLowerCase()) === -1)
-                            flag = false
+                        if(tRoles.indexOf(roles[i].toLowerCase()) !== -1)
+                            flag = true
                     }
                 return flag
 
-
-                return false
             })
-
             state.tasks = result
         },
         onClear(state,action){

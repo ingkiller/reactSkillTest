@@ -16,6 +16,7 @@ const LeftSide=props=>{
     }
     const _onFilter = (event)=>{
         const {filter}=store.getState()
+
         dispatch(onFilter(filter))
 
     }

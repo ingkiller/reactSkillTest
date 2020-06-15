@@ -6,7 +6,7 @@ const Container = styled.div`
     display:flex!important;
     flex-direction:row!important;
     align-items:center;
-    justify-content:left;
+    
 `
 
 const TextSpan = styled.span`

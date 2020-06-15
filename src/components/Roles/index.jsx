@@ -1,85 +1,30 @@
-import React,{useEffect,useState,memo} from 'react'
+import React, {useEffect, useState, memo, useMemo, useCallback} from 'react'
 import styled from 'styled-components';
 import {useDispatch,useSelector} from "react-redux";
 import {requestRoles} from "../../reducers/app";
 import {RoleItem} from '../index'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee,faSortUp,faSortDown,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons'
-const libg = "#EEE";
-const liHoberColor = "#607D8B";
-const liHoberBg = "#857c81";
-const selectedBgColor = "#CFD8DC";
-const selectedColor = "#FFF";
-const selectedHoberBg="#BBD8DC"
-const aColor="#5c5c5c"
-const aSpan="#6c757d"
-const h4Color="#6c757d"
-
 const _width=98
-
-const Container = styled.div`
-  width: ${_width}%;
- 
-   ul {
-    list-style: none;
-    margin-block-start: 0;
-    padding-inline-start: 0;
-    
-    li {
-        cursor: pointer;
-        position: relative;
-        left: 0;
-        background-color: ${libg};
-        margin: .1em;
-        padding: .3em 0;
-        height: 3em;
-        border-radius: 4px;
-        & :hover {
-            color: ${selectedColor};
-            background-color:${liHoberBg};
-        }
-        &.selected {
-            background-color: ${selectedBgColor};
-            color: ${selectedColor};
-        }
-        &.selected:hover {
-            background-color: ${selectedHoberBg};
-            color: ${selectedColor};
-        }
-        a {
-            color: ${aColor};
-            display: block;
-            padding: .5rem 1rem;
-            text-decoration: none;
-            background-color: transparent;
-             span:{
-               color: ${aSpan}!important;
-              } 
-          }  
-         
-    }
-    h4{
-        color: ${h4Color}!important;
-        margin-left: 0.5rem!important;
-        font-size:larger
-    }
-  }
+const Container = styled.ul`
+   padding-inline-start: 0;
 `;
-
 const BoxHeader=styled.div`
    width: ${_width}%;
-  
     display: flex!important;
     flex-direction:row!important;
     justify-content: space-between!important;
-   
+`;
+const Box=styled.div`
+    display:${props=>props.show?'block':'none'} 
 `;
 
-
 const Roles=memo(({title,onselectRole})=>{
+    const roles=useSelector(state=>state.filter.roles)
+
     const [show,setShow]=useState(true)
     const [arrRoles,setArrRoles]=useState([])
-    const [rolesSelected,setRolesSelected]=useState([])
+    const [rolesSelected,setRolesSelected]=useState(roles)
 
     const dispatch = useDispatch()
 
@@ -89,21 +34,13 @@ const Roles=memo(({title,onselectRole})=>{
       })
    },[])
 
-       const _onSelectRole=(roleName)=>{
-           onselectRole(roleName)
+    useEffect(()=>{
+        setRolesSelected(roles)
+    },[roles])
 
-           let selected = [...rolesSelected]
-
-           let index = selected.indexOf(roleName)
-           if(index === -1){
-               selected.push(roleName)
-           }else
-           {
-               selected = selected.filter(elem => elem !== roleName)
-           }
-           setRolesSelected(selected)
-       }
-
+    const _onSelectRole= useCallback((roleName)=>{
+        onselectRole(roleName)
+    },[])
     return(<>
             <BoxHeader>
                 <h4>{title}</h4>
@@ -112,9 +49,8 @@ const Roles=memo(({title,onselectRole})=>{
                     <FontAwesomeIcon icon={show? faSortUp:faSortDown} />
             </span>
             </BoxHeader>
-            <div className={show?"collapse show":"collapse"}>
-                <Container>
-                    <ul>
+            <Box show={show}>
+                    <Container>
                         {
                             arrRoles.map((item,key)=>(<RoleItem
                                 key={key}
@@ -123,10 +59,9 @@ const Roles=memo(({title,onselectRole})=>{
                                 onSelect={_onSelectRole}
                             />))
                         }
-                    </ul>
-                </Container>
-            </div>
-</>
-        )
+                    </Container>
+            </Box>
+        </>
+    )
 })
 export default Roles

@@ -1,26 +1,13 @@
-import React, {useState, useEffect, useMemo} from "react";
-import {debounce} from 'lodash';
+import React, {useState, useEffect, useMemo,memo} from "react";
 import {useSelector,useDispatch} from "react-redux";
 import {CellRole, CellStatus, EmployeeItem, FilterCmp} from '../components'
-import {addSearch} from "../reducers/filter";
-
+import {getTasks} from "../reducers/app";
 const RightSide=props=>{
-    const {app:{tasks},filter:{search}}=useSelector(state=>state)
+    const tasks=useSelector(state=>state.app.tasks)
     const dispatch = useDispatch()
-    const [_search,setSearch]=useState(search)
-
-
-    const _onChangeSearch=event=>{
-        /*
-        let temp = event.target.value
-       debounce(()=>{
-           console.log('temp:',temp)
-       },1000)()
-
-         */
-        setSearch(event.target.value)
-        dispatch(addSearch(event.target.value))
-    }
+    useEffect(()=>{
+        dispatch(getTasks())
+    },[])
 
     const header = useMemo(()=>[
         {
@@ -36,17 +23,18 @@ const RightSide=props=>{
             cell:row=><CellStatus status={row.status}/>
         }
     ],[])
-    return <div className="container-fluid">
 
+    const _tasks=useMemo(()=>tasks,[tasks])
+    return <div className="container-fluid">
         <div className="row ">
-            <FilterCmp
-                title={"Awesome Cmp"}
-                header={header}
-                arrTask={tasks}
-                search={search}
-                onChangeSearch={_onChangeSearch}
-            />
+            {
+                <FilterCmp
+                    title={"Awesome Cmp"}
+                    header={header}
+                    tasks={_tasks}
+                />
+            }
         </div>
     </div>
 }
-export default RightSide
+export default memo(RightSide)

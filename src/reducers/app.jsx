@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
-import {ROLES} from "../communs/variables";
+import {ROLES,STATUS} from "../communs/variables";
 import {tasks} from "../data";
 
 const requestRoles = createAsyncThunk('REQUEST_ROLES',
@@ -40,6 +40,7 @@ const requestRoles = createAsyncThunk('REQUEST_ROLES',
 
     })
 
+
 const appSlice = createSlice({
     name: 'app',
     initialState: {
@@ -66,34 +67,70 @@ const appSlice = createSlice({
             state.roles = rr
         },
         getStatus(state, action) {
+            console.log('getStatus reducer')
+            let rr = []
+            for (let [key, value] of Object.entries(STATUS)) {
+                let count = 0;
+                let st={}
+                for(let i = 0;i<tasks.length;i++){
+
+                    let st = tasks[i].status
+                    let temp = value.status === undefined?value:value.status
+
+                    if(st.color === undefined){
+
+                        if(st.toLowerCase() === temp.toLowerCase())
+                            count++
+                    } else {
+                        if(st.status.toLowerCase() === temp.toLowerCase())
+                            count++
+                    }
+                }
+                rr.push({status:value.status !== undefined?value.status:value,count:count,color:value.color})
+            }
+            state.status = rr
         },
         getTasks(state,action){
             state.tasks = tasks
         },
         onFilter(state,action){
 
-            const {search,roles} = action.payload
+            const {search,roles,status} = action.payload
 
             let data = [...state.tasks]
 
             let result = data.filter(task=>{
                 if(search !== ''){
                     if(task.employee.toLowerCase().indexOf(search.toLowerCase()) !== -1)
-                           return true}
+                           return true
+                }
 
-                let flag = false
+                let flagRoles = false
                     for(let i = 0;i< roles.length;i++){
                         let tRoles = task.roles.map(item=>item.toLowerCase())
                         if(tRoles.indexOf(roles[i].toLowerCase()) !== -1)
-                            flag = true
+                            flagRoles = true
                     }
-                return flag
+                    if(flagRoles === true)
+                        return true
+
+
+                for(let i = 0;i< status.length;i++){
+
+                    let tStatus = task.status.color === undefined ? task.status:task.status.status
+                    if(status.indexOf(tStatus) !== -1)
+                        return true
+                }
+
+                return false
 
             })
             state.tasks = result
         },
         onClear(state,action){
             state.tasks = tasks
+            state.status=[]
+            state.roles=[]
         }
     },
     extraReducers:{
@@ -114,6 +151,6 @@ const appSlice = createSlice({
 
 })
 
-export const { getTasks,getRoles,onFilter,onClear } = appSlice.actions
+export const { getTasks,getRoles,onFilter,onClear,getStatus } = appSlice.actions
 export {requestRoles}
 export default appSlice.reducer

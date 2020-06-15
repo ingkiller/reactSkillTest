@@ -7,4 +7,7 @@ import Roles from "./Roles";
 import SearchBar from './SearchBar'
 import CellRole from './CellRole'
 import CellStatus from './CellStatus'
-export {ButtonsFilter,FilterCmp,EmployeeItem,TaskItem,RoleItem,Roles,SearchBar,CellRole,CellStatus}
+import Status from "./Status";
+import StatusItem from "./StatusItem"
+export {ButtonsFilter,FilterCmp,EmployeeItem,TaskItem,RoleItem,Roles,SearchBar,CellRole,CellStatus,
+    Status,StatusItem}

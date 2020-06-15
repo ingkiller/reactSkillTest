@@ -1,14 +1,15 @@
-import React,{useMemo,useCallback,memo} from "react";
-import {useSelector,useDispatch,useStore} from "react-redux";
+import React,{useCallback,memo,useState} from "react";
+import {useDispatch,useStore} from "react-redux";
 import {onFilter,onClear} from "../reducers/app";
-import {clearAllFilter,addRoles,getFilter} from "../reducers/filter";
-import {ButtonsFilter,Roles} from '../components'
+import {clearAllFilter,addRoles,addStatus} from "../reducers/filter";
+import {ButtonsFilter,Roles,Status} from '../components'
 
 const LeftSide=props=>{
 
-  //  const {filter}=useSelector(state=>state)
     const store = useStore()
     const dispatch = useDispatch()
+
+    const [arrStatus,setArrStatus]=useState([])
 
     const _onClearFilter=(event)=>{
         dispatch(onClear())
@@ -16,7 +17,6 @@ const LeftSide=props=>{
     }
     const _onFilter = (event)=>{
         const {filter}=store.getState()
-
         dispatch(onFilter(filter))
 
     }
@@ -24,11 +24,13 @@ const LeftSide=props=>{
         dispatch(addRoles(newRole))
     }, []);
 
+    const _onselectStatus= useCallback((newStatus)=>{
+        dispatch(addStatus(newStatus))
+    },[])
+
     return <>
-        {
-            console.log('leftside render')
-        }
         <Roles title={"Roles"} onselectRole={_onselectRole}/>
+        <Status title={"Status"} arrStatus={arrStatus} onSelectStatus={_onselectStatus}/>
         <ButtonsFilter clearTxt={"Clear"}
                        filterTxt={"Filter"}
                        onClear={_onClearFilter}

@@ -8,10 +8,11 @@ export const ROLES = Object.freeze({
 })
 
 export const STATUS = Object.freeze({
-    "TO_DO":"To Do",
-    "WORKING_ON":"Working On",
-    "TESTING":"Testing",
-    "DONE":"Done",
+    "TO_DO":{status:"To_Do",color:"#28a745"},
+    "WORKING_ON":{status:"Working_On",color:"#007bff"},
+    "TESTING":{status:"Testing",color:"#ffc107"},
+    "DONE":{status:"Done",color:"#6c757d"},
+    "OTHER":"Other"
 })
 
 export const COLOR = Object.freeze({

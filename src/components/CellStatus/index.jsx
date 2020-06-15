@@ -1,6 +1,6 @@
 import React,{memo} from "react";
 
 const CellStatus = ({status})=>{
-    return <div>{status.status !== undefined ? status.status:status}</div>
+    return <div>{status.color !== undefined ? status.status:status}</div>
 }
 export default memo(CellStatus)

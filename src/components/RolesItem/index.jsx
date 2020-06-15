@@ -1,12 +1,26 @@
-import React from "react";
+import React,{memo} from "react";
 import styled from "styled-components";
-const Container = styled.div`
-    width: 25px;
-     height: 25px;
-     display: flex;
-     justify-content: center;
-     align-items: flex-end;
-     float:right!important
+
+const libg = "#EEE";
+const liHoberColor = "#FFF";
+const liHoberBg = "#857c81";
+const selectedBgColor = "#0072ff3d";
+const borderSelected="#0000ff"
+
+const LiRoleItem = styled.li`
+       display:flex;
+       justify-content: space-between!important;
+       cursor: pointer;
+       position: relative;
+       background-color:${props => props.selected?selectedBgColor:libg}!important;
+       margin: .1em;
+       padding: .1em .3em;
+       align-items: center;
+       border: ${props => props.selected?'solid 1px '+borderSelected:'none'};
+        &:hover {
+            color: ${liHoberColor}!important;
+            background-color:${liHoberBg}!important;
+        }
      `;
 const RoleItem=({role,count,selected,onSelect})=>{
 
@@ -14,15 +28,11 @@ const RoleItem=({role,count,selected,onSelect})=>{
         event.preventDefault()
         onSelect(role)
     }
-    return <li className={(selected?"selected":"")}>
-        <a  href="/" onClick={_onSelect}>
-            <span>{role}</span>
-            <Container>
-                <span>{count}</span>
-            </Container>
-        </a>
-    </li>
+    return <LiRoleItem selected={selected} onClick={_onSelect}>
+        <span>{role}</span>
+        <span>{count}</span>
+    </LiRoleItem>
 }
-export default RoleItem
+export default memo(RoleItem)
 
 

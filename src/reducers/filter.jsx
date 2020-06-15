@@ -1,13 +1,11 @@
-import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
-import {ROLES} from "../communs/variables";
-import {tasks} from "../data";
+import { createSlice } from '@reduxjs/toolkit'
 
 const filterSlice = createSlice({
     name: 'app',
     initialState: {search:'',roles:[],status:[]},
     reducers: {
         getFilter(state,action){
-            return state
+             state=state
         },
         addSearch(state, action) {
             state.search=action.payload
@@ -15,23 +13,29 @@ const filterSlice = createSlice({
         addRoles(state, action) {
             let roleName = action.payload
             let rolesSelected = [...state.roles]
-
             let index = rolesSelected.indexOf(roleName)
             if(index === -1){
                 rolesSelected.push(roleName)
-            }else
-            {
+            }else {
                 rolesSelected = rolesSelected.filter(elem => elem !== roleName)
             }
             state.roles=rolesSelected
         },
         addStatus(state,action){
-
+            let statusName = action.payload
+            let statusSelected = [...state.status]
+            let index = statusSelected.indexOf(statusName)
+            if(index === -1){
+                statusSelected.push(statusName)
+            }else{
+                statusSelected = statusSelected.filter(elem => elem !== statusName)
+            }
+            state.status=statusSelected
         },
         clearAllFilter(state,action){
             state.search=''
             state.roles=[]
-            state.string=[]
+            state.status=[]
         }
     },
 

@@ -2,8 +2,8 @@ import {ROLES,STATUS,COLOR} from "../communs/variables";
 
 export const tasks= [
     {"employee":"Luis Dominguez", "roles":[ROLES.DEVELOPER], "status":STATUS.DONE},
-    {"employee":"Manuel Arias", "roles":[ROLES.DEVELOPER], "status":{"status":STATUS.TO_DO,"color":COLOR.GREEN}},
-    {"employee":"Evaristo Escalona", "roles":[ROLES.DEVELOPER], "status":STATUS.DONE},
+    {"employee":"Manuel Arias", "roles":[ROLES.DEVELOPER], "status":STATUS.TO_DO},
+    {"employee":"Evaristo Escalona", "roles":[ROLES.DEVELOPER], "status":STATUS.OTHER},
     {"employee":"Maikel Torres", "roles":[ROLES.DEVELOPER], "status":STATUS.DONE},
     {"employee":"Yisel Naranjo", "roles":[ROLES.DEVELOPER], "status":STATUS.DONE},
 

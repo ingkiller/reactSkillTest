@@ -10,10 +10,10 @@ export const tasks= [
     {"employee":"Fernando Saldivar", "roles":[ROLES.ANALIST], "status":STATUS.DONE},
     {"employee":"Elvis Guerrero", "roles":[ROLES.ANALIST], "status":STATUS.DONE},
 
-    {"employee":"Marlenes Pardo", "roles":[ROLES.TEAM_LEADER], "status":STATUS.DONE},
+    {"employee":"Marlenes Pardo", "roles":[ROLES.TEAM_LEADER], "status":STATUS.TESTING},
 
 
-    {"employee":"Camila Aguilera", "roles":[ROLES.DESIGNER], "status":STATUS.DONE},
+    {"employee":"Camila Aguilera", "roles":[ROLES.DESIGNER], "status":STATUS.WORKING_ON},
     {"employee":"Maikel Brito", "roles":[ROLES.DESIGNER], "status":STATUS.DONE},
 
 
@@ -21,12 +21,12 @@ export const tasks= [
 
 
 
-    {"employee":"Felipe Fabre", "roles":[ROLES.DEVELOPER,ROLES.ANALIST], "status":STATUS.DONE},
+    {"employee":"Felipe Fabre", "roles":[ROLES.DEVELOPER,ROLES.ANALIST], "status":STATUS.WORKING_ON},
     {"employee":"Roberto Almira", "roles":[ROLES.DEVELOPER,ROLES.DESIGNER], "status":STATUS.DONE},
 
-    {"employee":"Yadiana Ramirez", "roles":[ROLES.PROJECT_OWNER,ROLES.TEAM_LEADER], "status":STATUS.DONE},
+    {"employee":"Yadiana Ramirez", "roles":[ROLES.PROJECT_OWNER,ROLES.TEAM_LEADER], "status":STATUS.TESTING},
 
     {"employee":"Lidia Borjas", "roles":[ROLES.DEVELOPER,ROLES.PROJECT_OWNER], "status":STATUS.DONE},
-    {"employee":"Sofia Barajo", "roles":[ROLES.DESIGNER,ROLES.ANALIST], "status":STATUS.DONE},
+    {"employee":"Sofia Barajo", "roles":[ROLES.DESIGNER,ROLES.ANALIST], "status":STATUS.TESTING},
 
 ]

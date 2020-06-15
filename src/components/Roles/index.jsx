@@ -45,9 +45,9 @@ const Roles=memo(({title,onselectRole})=>{
             <BoxHeader>
                 <h4>{title}</h4>
                 <span type="button" onClick={()=>setShow(!show)}>
-                <FontAwesomeIcon icon={show?faEyeSlash:faEye} />{' '}
+                    <FontAwesomeIcon icon={show?faEyeSlash:faEye} />{' '}
                     <FontAwesomeIcon icon={show? faSortUp:faSortDown} />
-            </span>
+                </span>
             </BoxHeader>
             <Box show={show}>
                     <Container>

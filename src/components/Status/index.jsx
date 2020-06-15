@@ -31,8 +31,7 @@ const BoxHeader=styled.div`
    
 `;
 const Box=styled.div`
-    display:${props=>props.show?'block':'none'}
-    
+    display:${props=>props.show?'block':'none'} 
 `;
 
 const Status=memo(({title,onSelectStatus})=>{
@@ -79,5 +78,4 @@ const Status=memo(({title,onSelectStatus})=>{
         </>
     )
 })
-
 export default Status

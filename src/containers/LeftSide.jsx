@@ -9,16 +9,14 @@ const LeftSide=props=>{
     const store = useStore()
     const dispatch = useDispatch()
 
-    const [arrStatus,setArrStatus]=useState([])
-
     const _onClearFilter=(event)=>{
         dispatch(onClear())
         dispatch(clearAllFilter())
     }
     const _onFilter = (event)=>{
         const {filter}=store.getState()
-        dispatch(onFilter(filter))
-
+        if(filter.search !== "" || filter.roles.length > 0 || filter.status.length > 0)
+            dispatch(onFilter(filter))
     }
     const _onselectRole = useCallback((newRole) => {
         dispatch(addRoles(newRole))
@@ -30,7 +28,7 @@ const LeftSide=props=>{
 
     return <>
         <Roles title={"Roles"} onselectRole={_onselectRole}/>
-        <Status title={"Status"} arrStatus={arrStatus} onSelectStatus={_onselectStatus}/>
+        <Status title={"Status"} onSelectStatus={_onselectStatus}/>
         <ButtonsFilter clearTxt={"Clear"}
                        filterTxt={"Filter"}
                        onClear={_onClearFilter}

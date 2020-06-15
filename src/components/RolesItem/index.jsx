@@ -34,5 +34,3 @@ const RoleItem=({role,count,selected,onSelect})=>{
     </LiRoleItem>
 }
 export default memo(RoleItem)
-
-

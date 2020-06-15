@@ -1,9 +1,15 @@
 import React, {memo, useCallback, useEffect, useState} from "react";
+import styled from "styled-components";
 import {useSelector,useDispatch} from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import {debounce} from "lodash";
 import {addSearch} from "../../reducers/filter";
+
+const Container = styled.span`
+    position: relative;
+    margin: auto -30px;
+`
 
 const SearchBar=()=>{
 
@@ -29,7 +35,9 @@ const SearchBar=()=>{
 
     return <form className="form-inline">
         <input onChange={ _onChange} value={_search}  type="text" className="form-control w-75" placeholder="Search"/>
-        <span style={{position: 'relative',margin: 'auto -30px'}}><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></span>
+        <Container>
+            <FontAwesomeIcon icon={faSearch}/>
+        </Container>
     </form>
 }
 

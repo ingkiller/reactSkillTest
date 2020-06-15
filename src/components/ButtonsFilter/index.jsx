@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 const ButtonsFilter=({clearTxt,filterTxt,onClear,onFilter})=>{
     return <div className="flex-row pr-2">
-        <button className="btn btn-outline-secondary" onClick={onClear}>{clearTxt}</button>
-        <button className="btn btn-primary float-right" onClick={onFilter}>{filterTxt}</button>
+        <button className="btn btn-primary" onClick={onFilter}>{filterTxt}</button>
+        <button className="btn btn-outline-secondary float-right" onClick={onClear}>{clearTxt}</button>
     </div>
 }
 ButtonsFilter.prototype={

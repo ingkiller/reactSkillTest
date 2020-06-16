@@ -16,7 +16,7 @@ const LiRoleItem = styled.li`
        margin: .1em;
        padding: .1em .3em;
        align-items: center;
-       border: ${props => props.selected?'solid 1px '+borderSelected:'none'};
+       border: ${props => props.selected?'solid 1px '+borderSelected:'solid 1px transparent'};
         &:hover {
             color: ${liHoberColor}!important;
             background-color:${liHoberBg}!important;

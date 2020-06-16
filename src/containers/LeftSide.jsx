@@ -15,7 +15,7 @@ const LeftSide=props=>{
     }
     const _onFilter = (event)=>{
         const {filter}=store.getState()
-        if(filter.search !== "" || filter.roles.length > 0 || filter.status.length > 0)
+       // if(filter.search !== "" || filter.roles.length > 0 || filter.status.length > 0)
             dispatch(onFilter(filter))
     }
     const _onselectRole = useCallback((newRole) => {

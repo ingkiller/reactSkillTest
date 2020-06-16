@@ -1,10 +1,11 @@
 import React, {memo, useCallback, useEffect, useState} from "react";
 import styled from "styled-components";
-import {useSelector,useDispatch} from "react-redux";
+import {useSelector,useDispatch,useStore} from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import {debounce} from "lodash";
 import {addSearch} from "../../reducers/filter";
+import {onFilter} from "../../reducers/app";
 
 const Container = styled.span`
     position: relative;
@@ -14,6 +15,7 @@ const Container = styled.span`
 const SearchBar=()=>{
 
     const dispatch=useDispatch()
+    const store=useStore()
     const search=useSelector(state=>state.filter.search)
     const [_search,setSearch]=useState("")
 
@@ -26,6 +28,9 @@ const SearchBar=()=>{
 
     const delay = useCallback(debounce((value)=>{
         dispatch(addSearch(value))
+        const {filter}=store.getState()
+        dispatch(onFilter(filter))
+
     },500),[])
 
     const _onChange=event=>{

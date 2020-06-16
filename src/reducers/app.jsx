@@ -97,15 +97,18 @@ const appSlice = createSlice({
 
             const {search,roles,status} = action.payload
 
-            let data = [...state.tasks]
+            if(search === "" && roles.length === 0&& status.length === 0){
+                state.tasks = tasks
+            }else {
+                let data = [...state.tasks]
 
-            let result = data.filter(task=>{
-                if(search !== ''){
-                    if(task.employee.toLowerCase().indexOf(search.toLowerCase()) !== -1)
-                           return true
-                }
+                let result = data.filter(task=>{
+                    if(search !== ''){
+                        if(task.employee.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+                            return true
+                    }
 
-                let flagRoles = false
+                    let flagRoles = false
                     for(let i = 0;i< roles.length;i++){
                         let tRoles = task.roles.map(item=>item.toLowerCase())
                         if(tRoles.indexOf(roles[i].toLowerCase()) !== -1)
@@ -115,17 +118,20 @@ const appSlice = createSlice({
                         return true
 
 
-                for(let i = 0;i< status.length;i++){
+                    for(let i = 0;i< status.length;i++){
 
-                    let tStatus = task.status.color === undefined ? task.status:task.status.status
-                    if(status.indexOf(tStatus) !== -1)
-                        return true
-                }
+                        let tStatus = task.status.color === undefined ? task.status:task.status.status
+                        if(status.indexOf(tStatus) !== -1)
+                            return true
+                    }
 
-                return false
+                    return false
 
-            })
-            state.tasks = result
+                })
+                state.tasks = result
+            }
+
+
         },
         onClear(state,action){
             state.tasks = tasks
